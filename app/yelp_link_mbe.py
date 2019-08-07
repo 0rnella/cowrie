@@ -3,7 +3,7 @@ from app import log
 from requests import get
 from requests.exceptions import RequestException
 from contextlib import closing
-import json
+from .socrata_api_query import json_get
 
 # error handling function to determine whether response is good or not
 def is_good_html_response(resp):
@@ -24,11 +24,6 @@ def html_get(url):
     except RequestException as e:
         log.error('Error during requests to {0} : {1}').format(url, str(e))
         return None
-
-# get json responses with requests
-def json_get(api_url):
-    resp = get(api_url).json()
-    return resp
 
 # scrapping program to get the business information from yelp
 def get_yelp_biz_info (url):
